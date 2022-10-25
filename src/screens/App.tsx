@@ -3,16 +3,42 @@
 
 import React from 'react'
 
+import { Route, Routes, HashRouter } from 'react-router-dom'
 
 
-const { API_KEY } = process.env
+import Home  from './Home'
+import Book from './Book'
 
 
 
-const App = () => {
-
-    return <React.Fragment>Small application working with Google Books API. Available: search, description review.<br />{API_KEY}</React.Fragment>
+interface UrlList {
+    [x: string]: string
 }
+
+
+const URL_LIST: UrlList = {
+    HOME: '/',
+    BOOK_ID: '/book/:id'
+}
+
+
+
+const App = (): JSX.Element => {
+
+
+    return <HashRouter>
+
+        <Routes>
+
+            <Route path={URL_LIST.HOME} element={<Home />} />
+
+            <Route path={URL_LIST.BOOK_ID} element={<Book />} />
+
+        </Routes>
+
+    </HashRouter>
+}
+
 
 
 export default App
