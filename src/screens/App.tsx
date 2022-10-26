@@ -6,7 +6,7 @@ import React from 'react'
 import { Route, Routes, HashRouter } from 'react-router-dom'
 
 
-import Home  from './Home'
+import Home  from './Home/Home'
 import Book from './Book'
 
 

@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 
 
@@ -12,6 +13,11 @@ import CssBaseline from '@mui/joy/CssBaseline'
 
 
 import App from './screens/App'
+
+import store from './store/store'
+
+
+import './index.scss'
 
 
 
@@ -40,6 +46,8 @@ export const makeRendering = (children: React.ReactNode, container = baseContain
 makeRendering(<CssVarsProvider>
     <CssBaseline />
 
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
 
 </CssVarsProvider>)
