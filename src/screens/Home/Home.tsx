@@ -3,29 +3,21 @@
 
 import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
-
 
 import Box from '@mui/joy/Box'
+import CircularProgress from '@mui/joy/CircularProgress'
 
 
-import Header from './Header'
-import SearchBlock from './SearchBlock'
+import Header from 'src/components/Header'
+import SearchBlock from 'src/screens/Home/SearchBlock'
+
+import BooksList from 'src/screens/Home/BooksList'
 
 
-
-import useDebounce from '../../hooks/useDebounce'
-
-
-import booksAPI from '../../services/booksAPI'
+import useDebounce from 'src/hooks/useDebounce'
 
 
-
-
-
-import type { GetListResults } from '../../interfaces/main'
-import BooksList from './BooksList'
-
+import useBooksLoader from 'src/hooks/useBooksLoader'
 
 
 
@@ -33,32 +25,14 @@ import BooksList from './BooksList'
 
 const Home = (): JSX.Element => {
 
-    const navigate = useNavigate()
-
-
-
     const [search, setSearch] = React.useState<string>('')
 
-
-
-    const [
-        getBooksList,
-        {
-            isLoading: loading,
-            data: responseData
-        }
-    ] = booksAPI.useGetListMutation()
-
-
-    const { items: books } = (responseData as GetListResults) ?? {}
+    const { getBooksList, loading, books } = useBooksLoader()
 
 
     useDebounce({
         search,
         callback: (text) => {
-
-            console.debug('text', text)
-
 
             Boolean(text) && getBooksList({ search: text })
         }
@@ -67,19 +41,19 @@ const Home = (): JSX.Element => {
 
     return <React.Fragment>
 
-        <Box
-            component="ul"
-            sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}
+        <SearchBlock setSearch={setSearch} />
+
+
+        {loading && <Box
+            component="li"
+            sx={{ display: 'flex', p: 7, m: 0, justifyContent: 'center' }}
         >
-            <Header />
 
-            <SearchBlock setSearch={setSearch} />
+            <CircularProgress size="lg" />
+        </Box>}
 
-            <br />
 
-            <BooksList books={books} />
-
-        </Box>
+        <BooksList books={books} />
 
     </React.Fragment>
 }

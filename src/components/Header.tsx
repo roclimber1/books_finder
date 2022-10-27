@@ -14,7 +14,7 @@ import Typography from '@mui/joy/Typography'
 
 
 
-import { SRC, SRC_SET } from '../../constants/main'
+import { SRC, SRC_SET } from 'src/constants/main'
 
 
 

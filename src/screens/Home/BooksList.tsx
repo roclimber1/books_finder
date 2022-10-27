@@ -4,11 +4,13 @@
 import React from 'react'
 
 
-import BookCard from './BookCard'
+import Box from '@mui/joy/Box'
+
+import BookCard from 'src/screens/Home/BookCard'
 
 
 
-import type { Book } from '../../interfaces/main'
+import type { Book } from 'src/interfaces/main'
 
 
 
@@ -27,7 +29,7 @@ const BooksList: React.FC<BooksListProps> = (props) => {
 
 
 
-    const booksBlock = React.useMemo<Array<JSX.Element>>(() => {
+    const booksBlock = React.useMemo<Array<JSX.Element> | null>(() => {
 
         return books ? books?.map((book) => {
 
@@ -46,7 +48,13 @@ const BooksList: React.FC<BooksListProps> = (props) => {
 
     return (<React.Fragment>
 
-        {booksBlock}
+        <Box
+            component="div"
+            sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 4, m: 0 }}
+        >
+
+            {booksBlock}
+        </Box>
 
     </React.Fragment>)
 }

@@ -6,10 +6,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 
 
-import type { GetListResults } from '../interfaces/main'
+import type { GetListResults, GetListParameters } from 'src/interfaces/main'
 
 
 
+
+export const BOOKS_CACHE_KEY = 'BOOKS_LIST_KEY'
 
 
 const KEEP_UNUSED_DATA_FOR = 3600
@@ -20,14 +22,6 @@ const URLS = {
     GET_LIST: '/books/v1/volumes'
 }
 
-
-
-
-
-
-interface GetListParameters {
-    search: string
-}
 
 
 

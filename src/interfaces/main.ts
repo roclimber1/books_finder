@@ -28,3 +28,7 @@ export interface GetListResults {
     items: Array<Book>
     totalItems: number
 }
+
+export interface GetListParameters {
+    search: string
+}
