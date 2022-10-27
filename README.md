@@ -10,3 +10,10 @@ Small application working with Google Books API. Available: search, description 
 * отдельная страница для книги, где можно прочитать подробное описание
 * debounce поиска
 * пагинация
+
+
+### Для запуска использовать команду
+
+```bash
+npm run start
+```
