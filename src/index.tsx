@@ -12,12 +12,12 @@ import CssBaseline from '@mui/joy/CssBaseline'
 
 
 
-import App from './screens/App'
+import App from 'src/screens/App'
 
-import store from './store/store'
+import store from 'src/store/store'
 
 
-import './index.scss'
+import 'src/index.scss'
 
 
 

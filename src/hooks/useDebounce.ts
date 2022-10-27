@@ -4,7 +4,7 @@
 import React from 'react'
 
 
-import { DEFAULT_TIMEOUT } from '../constants/main'
+import { DEFAULT_TIMEOUT } from 'src/constants/main'
 
 
 

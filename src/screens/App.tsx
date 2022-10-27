@@ -6,8 +6,11 @@ import React from 'react'
 import { Route, Routes, HashRouter } from 'react-router-dom'
 
 
-import Home  from './Home/Home'
-import Book from './Book'
+import Home  from 'src/screens/Home/Home'
+import Book from 'src/screens/Book'
+
+
+import RoutesLayout from 'src/components/RoutesLayout/RoutesLayout'
 
 
 
@@ -30,9 +33,13 @@ const App = (): JSX.Element => {
 
         <Routes>
 
-            <Route path={URL_LIST.HOME} element={<Home />} />
+            <Route element={<RoutesLayout />}>
 
-            <Route path={URL_LIST.BOOK_ID} element={<Book />} />
+                <Route path={URL_LIST.HOME} element={<Home />} />
+
+                <Route path={URL_LIST.BOOK_ID} element={<Book />} />
+
+            </Route>
 
         </Routes>
 

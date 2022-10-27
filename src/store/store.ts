@@ -4,7 +4,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 
-import rootReducer from './rootReducer'
+import rootReducer from 'src/store/rootReducer'
 
 
 

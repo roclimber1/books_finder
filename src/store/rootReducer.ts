@@ -3,7 +3,7 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 
-import booksAPI from '../services/booksAPI'
+import booksAPI from 'src/services/booksAPI'
 
 
 

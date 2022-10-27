@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom'
 
 
 import AspectRatio from '@mui/joy/AspectRatio'
-import Box from '@mui/joy/Box'
 
 import Button from '@mui/joy/Button'
 import Card from '@mui/joy/Card'
+
+import CardContent from '@mui/joy/CardContent'
+
 
 import Typography from '@mui/joy/Typography'
 
@@ -21,7 +23,7 @@ import Typography from '@mui/joy/Typography'
 
 
 
-import { Book } from '../../interfaces/main'
+import { Book } from 'src/interfaces/main'
 
 
 
@@ -43,13 +45,13 @@ const BookCard: React.FC<BookCardProps> = (props) => {
     const { book } = props
     const { id, volumeInfo } = book ?? {}
 
-    const { title, authors, subtitle, publishedDate, imageLinks } = volumeInfo ?? {}
+    const { title, authors, imageLinks } = volumeInfo ?? {}
     const { thumbnail, smallThumbnail } = imageLinks ?? {}
 
 
 
 
-    const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
+    const handleClick: React.MouseEventHandler<HTMLAnchorElement> = () => {
 
         navigate(`/book/${id}`)
     }
@@ -64,9 +66,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
             </Typography>
 
 
-            <Typography level="body2">{subtitle}</Typography>
             <Typography level="body2">{authors?.join(', ')}</Typography>
-            <Typography level="body2">{publishedDate}</Typography>
 
 
             <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
@@ -79,7 +79,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
             </AspectRatio>
 
 
-            <Box sx={{ display: 'flex' }}>
+            <CardContent sx={{ display: 'flex' }}>
 
                 <Button
                     variant="solid"
@@ -91,7 +91,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
                 >
                     Explore
                 </Button>
-            </Box>
+            </CardContent>
         </Card>
     )
 }
