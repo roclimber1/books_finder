@@ -4,6 +4,10 @@
 import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
+
+import { BOOK_DEFAULT_SRC, BOOK_DEFAULT_SRC_SET } from 'src/constants/main'
 
 
 import AspectRatio from '@mui/joy/AspectRatio'
@@ -17,13 +21,13 @@ import CardContent from '@mui/joy/CardContent'
 import Typography from '@mui/joy/Typography'
 
 
+import { setPrevious } from 'src/store/searchSlice'
 
 
 
 
 
-
-import { Book } from 'src/interfaces/main'
+import type { Book } from 'src/interfaces/main'
 
 
 
@@ -40,6 +44,7 @@ interface BookCardProps {
 const BookCard: React.FC<BookCardProps> = (props) => {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 
     const { book } = props
@@ -53,6 +58,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
 
     const handleClick: React.MouseEventHandler<HTMLAnchorElement> = () => {
 
+        dispatch(setPrevious())
         navigate(`/book/${id}`)
     }
 
@@ -69,17 +75,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
             <Typography level="body2">{authors?.join(', ')}</Typography>
 
 
-            <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
-                <img
-                    src={smallThumbnail}
-                    srcSet={thumbnail}
-                    loading="lazy"
-                    alt={title}
-                />
-            </AspectRatio>
-
-
-            <CardContent sx={{ display: 'flex' }}>
+            <CardContent sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
 
                 <Button
                     variant="solid"
@@ -91,6 +87,16 @@ const BookCard: React.FC<BookCardProps> = (props) => {
                 >
                     Explore
                 </Button>
+
+                <AspectRatio minHeight="400px" maxHeight="500px" sx={{ my: 2 }}>
+                    <img
+                        src={smallThumbnail ?? BOOK_DEFAULT_SRC}
+                        srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}
+                        loading="lazy"
+                        alt={title}
+                    />
+                </AspectRatio>
+
             </CardContent>
         </Card>
     )

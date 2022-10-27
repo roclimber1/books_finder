@@ -1,14 +1,16 @@
 
 
+export interface ImageLinks {
+    smallThumbnail: string
+    thumbnail: string
+}
+
 
 export interface VolumeInfo {
     title: string
     authors: Array<string>
     description: string
-    imageLinks: {
-        smallThumbnail: string
-        thumbnail: string
-    }
+    imageLinks: ImageLinks
     publishedDate: string
     subtitle: string
 }
@@ -31,4 +33,5 @@ export interface GetListResults {
 
 export interface GetListParameters {
     search: string
+    page?: number
 }

@@ -50,7 +50,7 @@ const BooksList: React.FC<BooksListProps> = (props) => {
 
         <Box
             component="div"
-            sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 4, m: 0 }}
+            sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 4, m: 0, justifyContent: 'center' }}
         >
 
             {booksBlock}

@@ -3,6 +3,8 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
+import { MAX_RESULTS } from 'src/constants/main'
+
 
 
 
@@ -16,6 +18,7 @@ export const BOOKS_CACHE_KEY = 'BOOKS_LIST_KEY'
 
 const KEEP_UNUSED_DATA_FOR = 3600
 const BASE_URL = 'https://www.googleapis.com'
+
 
 
 const URLS = {
@@ -48,7 +51,8 @@ const booksAPI = createApi({
         getList: build.mutation<GetListResults, GetListParameters>({
             query: (data) => {
 
-                const { search } = data ?? {}
+                const { search, page = 1 } = data ?? {}
+                const startIndex: number = ((page - 1) * MAX_RESULTS)
 
 
                 return {
@@ -56,7 +60,9 @@ const booksAPI = createApi({
                     method: 'GET',
                     params: {
                         q: search,
-                        key: API_KEY
+                        key: API_KEY,
+                        maxResults: MAX_RESULTS,
+                        startIndex
                     }
                 }
             }

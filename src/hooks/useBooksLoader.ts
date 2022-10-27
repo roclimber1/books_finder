@@ -15,15 +15,16 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, M
 
 
 
-interface useBooksLoaderResults {
+interface UseBooksLoaderResults {
     books: Array<Book>
     getBooksList: MutationTrigger<MutationDefinition<GetListParameters, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, GetListResults, 'booksAPI'>>
     loading: boolean
+    totalItems: number
 }
 
 
 
-const useBooksLoader = (): useBooksLoaderResults => {
+const useBooksLoader = (): UseBooksLoaderResults => {
 
 
     const [
@@ -35,10 +36,12 @@ const useBooksLoader = (): useBooksLoaderResults => {
     ] = booksAPI .useGetListMutation({ fixedCacheKey: BOOKS_CACHE_KEY })
 
 
-    const { items: books } = (responseData as GetListResults) ?? {}
+    const { items: books, totalItems
+    } = (responseData as GetListResults) ?? {}
 
 
-    return { books, getBooksList, loading }
+    return { books, getBooksList, loading, totalItems
+    }
 }
 
 

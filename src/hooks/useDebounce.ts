@@ -8,17 +8,17 @@ import { DEFAULT_TIMEOUT } from 'src/constants/main'
 
 
 
-interface UseDebounceParameters<T> {
-    search: string
-    callback: T
+interface UseDebounceParameters<Parameter, Callback> {
+    value: Parameter
+    callback: Callback
 }
 
-type DefaultCallback = (search: string) => void
+export type DefaultCallback<Parameter> = (value: Parameter) => void
 
 
 
 
-function useDebounce<T extends DefaultCallback>({ search, callback }: UseDebounceParameters<T>): void {
+function useDebounce<Parameter, Callback extends DefaultCallback<Parameter>>({ value, callback }: UseDebounceParameters<Parameter, Callback>): void {
 
 
     const [searchTimeout, setSearchTimeout] = React.useState<NodeJS.Timeout>(null)
@@ -30,10 +30,10 @@ function useDebounce<T extends DefaultCallback>({ search, callback }: UseDebounc
         searchTimeout && clearTimeout(searchTimeout)
 
         setSearchTimeout(
-            setTimeout(() => callback(search), DEFAULT_TIMEOUT)
+            setTimeout(() => callback(value), DEFAULT_TIMEOUT)
         )
 
-    }, [search])
+    }, [value])
 
 
     React.useEffect(() => () => searchTimeout && clearTimeout(searchTimeout))
