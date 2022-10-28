@@ -16,7 +16,7 @@ import Typography from '@mui/joy/Typography'
 import Card from '@mui/joy/Card'
 
 import AspectRatio from '@mui/joy/AspectRatio'
-import CardContent from '@mui/joy/CardContent'
+
 
 
 import useBooksLoader from 'src/hooks/useBooksLoader'
@@ -25,6 +25,7 @@ import useBooksLoader from 'src/hooks/useBooksLoader'
 
 
 import type { SxProps } from '@mui/joy/styles/types'
+import type { Book as BooksItem } from 'src/interfaces/main'
 
 
 
@@ -44,9 +45,9 @@ const Book = () => {
     const { books } = useBooksLoader()
 
 
-    const book = React.useMemo(() => {
+    const book = React.useMemo<BooksItem | null>(() => {
 
-        return books.find((item) => (item.id == id))
+        return books.find((item) => (item.id == id)) ?? null
 
     }, [id])
 
@@ -57,10 +58,8 @@ const Book = () => {
 
 
 
-    /**
-     *
-     */
-    function handleClick(): void {
+    const handleClick = (): void => {
+
         navigate(-1)
     }
 
@@ -79,18 +78,21 @@ const Book = () => {
                 sx={{ gap: 2 }}
             >
 
-                <AspectRatio ratio="1" sx={{ width: 90 }}>
-                    <img
-                        src={smallThumbnail ?? BOOK_DEFAULT_SRC}
-                        srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}
-                        loading="lazy"
-                        alt={title}
-                    />
+                <Box sx={{ px: 2 }}>
 
-                </AspectRatio>
+                    <AspectRatio ratio="3/4" sx={{ width: 250 }}>
+                        <img
+                            src={smallThumbnail ?? BOOK_DEFAULT_SRC}
+                            srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}
+                            loading="lazy"
+                            alt={title}
+                        />
+
+                    </AspectRatio>
+                </Box>
 
 
-                <CardContent sx={{ px: 2 }}>
+                <Box sx={{ px: 2, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
 
                     <Typography level="h2" fontSize="md" sx={TYPOGRAPHY_STYLE}>
                         {title}
@@ -107,7 +109,7 @@ const Book = () => {
                     <Typography level="body1" sx={TYPOGRAPHY_STYLE}>{description}</Typography>
 
 
-                    <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column-reverse', justifyItems: 'flex-end', height: '100%' }}>
 
                         <Button
                             variant="solid"
@@ -117,11 +119,11 @@ const Book = () => {
                             sx={{ ml: 'auto', fontWeight: 600 }}
                             onClick={handleClick}
                         >
-                        Go back
+                            Go back
                         </Button>
                     </Box>
 
-                </CardContent>
+                </Box>
 
             </Card>
         </Box>

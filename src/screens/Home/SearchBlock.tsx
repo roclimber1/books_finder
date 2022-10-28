@@ -6,19 +6,19 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
-import Button from '@mui/joy/Button'
+
+import Box from '@mui/joy/Box'
 
 import Card from '@mui/joy/Card'
-import CardContent from '@mui/joy/CardContent'
-
-import TextField from '@mui/joy/TextField'
 
 import SearchIcon from '@mui/icons-material/Search'
-import ClearIcon from '@mui/icons-material/Clear'
 
 
-import { setSearch, clear } from 'src/store/searchSlice'
+import { setSearch, clearSearch, setSubject, clearSubject } from 'src/store/searchSlice'
 import { setPage } from 'src/store/pageSlice'
+
+
+import SearchInput from 'src/components/SearchInput'
 
 
 
@@ -32,7 +32,7 @@ const SearchBlock: React.FC = () => {
 
 
     const dispatch = useDispatch()
-    const search: string = useSelector((state: RootState) => state.search.value)
+    const { value: search, subject } = useSelector((state: RootState) => state.search)
 
 
     const handleTextChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (event) => {
@@ -45,9 +45,25 @@ const SearchBlock: React.FC = () => {
 
     const handleClear: React.MouseEventHandler<HTMLAnchorElement> = () => {
 
-        dispatch(clear())
+        dispatch(clearSearch())
         dispatch(setPage(1))
     }
+
+
+    const handleSubjectChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (event) => {
+
+        const { value } = event.target
+
+        dispatch(setSubject(value))
+    }
+
+
+    const handleSubjectClear: React.MouseEventHandler<HTMLAnchorElement> = () => {
+
+        dispatch(clearSubject())
+        dispatch(setPage(1))
+    }
+
 
 
 
@@ -56,28 +72,31 @@ const SearchBlock: React.FC = () => {
 
         <Card component="li" sx={{ minWidth: 800, flexGrow: 1 }}>
 
-            <CardContent>
 
-                <TextField
-                    color="neutral"
+            <Box
+                component="div"
+                sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', m: 0, justifyContent: 'center' }}
+            >
+
+                <SearchInput
                     value={search}
-                    disabled={false}
-                    variant="soft"
-                    size="md"
-                    onChange={handleTextChange}
+                    label={'Search string'}
+                    handleChange={handleTextChange}
                     startDecorator={<SearchIcon />}
-
-                    endDecorator={<Button
-                        aria-label="Clear"
-                        variant="plain"
-                        color="neutral"
-                        onClick={handleClear}
-                    >
-                        <ClearIcon />
-                    </Button>}
+                    handleClear={handleClear}
                 />
 
-            </CardContent>
+
+                <SearchInput
+                    value={subject}
+                    label={'Subject'}
+                    handleChange={handleSubjectChange}
+                    handleClear={handleSubjectClear}
+                    helperText={'Returns results where the text following this keyword is listed in the category list of the volume.'}
+                />
+            </Box>
+
+
         </Card>
 
     </React.Fragment>

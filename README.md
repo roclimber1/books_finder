@@ -17,3 +17,9 @@ Small application working with Google Books API. Available: search, description 
 ```bash
 npm run start
 ```
+
+### Для сбрки статики использовать команду
+
+```bash
+npm run build
+```

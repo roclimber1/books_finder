@@ -66,6 +66,27 @@ const booksAPI = createApi({
                     }
                 }
             }
+        }),
+
+
+        getBooks: build.query<GetListResults, GetListParameters>({
+            query: (data) => {
+
+                const { search, page = 1 } = data ?? {}
+                const startIndex: number = ((page - 1) * MAX_RESULTS)
+
+
+                return {
+                    url: URLS.GET_LIST,
+                    method: 'GET',
+                    params: {
+                        q: search,
+                        key: API_KEY,
+                        maxResults: MAX_RESULTS,
+                        startIndex
+                    }
+                }
+            }
         })
 
     })

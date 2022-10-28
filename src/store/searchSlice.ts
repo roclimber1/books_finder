@@ -9,11 +9,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface SearchState {
   value: string
-  previous: string
+  subject: string
 }
 
 
-const initialState = { value: '', previous: '' } as SearchState
+const initialState = { value: '', subject: '' } as SearchState
 
 
 const searchSlice = createSlice({
@@ -25,18 +25,21 @@ const searchSlice = createSlice({
         setSearch(state, action: PayloadAction<string>) {
             state.value = action.payload
         },
-        clear(state) {
+        clearSearch(state) {
             state.value = ''
         },
-        setPrevious(state) {
-            state.previous = state.value
+        setSubject(state, action: PayloadAction<string>) {
+            state.subject = action.payload
+        },
+        clearSubject(state) {
+            state.subject = ''
         }
     }
 })
 
 
 
-export const { setSearch, clear, setPrevious } = searchSlice.actions
+export const { setSearch, clearSearch, setSubject, clearSubject } = searchSlice.actions
 
 
 export default searchSlice.reducer

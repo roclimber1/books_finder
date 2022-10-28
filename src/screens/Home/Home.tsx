@@ -3,28 +3,29 @@
 
 import React from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 
 import Box from '@mui/joy/Box'
 import CircularProgress from '@mui/joy/CircularProgress'
 
+import Typography from '@mui/joy/Typography'
+
 
 import SearchBlock from 'src/screens/Home/SearchBlock'
-
 import BooksList from 'src/screens/Home/BooksList'
-
-
-import useDebounce, { DefaultCallback } from 'src/hooks/useDebounce'
-import useBooksLoader from 'src/hooks/useBooksLoader'
-
 
 import NavigationPanel from 'src/components/NavigationPanel'
 
 
+import useBooksLoader from 'src/hooks/useBooksLoader'
 
 
-import type { RootState } from 'src/store/store'
+import { setTotalItems, setLastPageFlag } from 'src/store/pageSlice'
+
+
+
+
 
 
 
@@ -32,39 +33,35 @@ import type { RootState } from 'src/store/store'
 
 const Home: React.FC = () => {
 
-    const page: number = useSelector((state: RootState) => state.page.value)
-    const search: string = useSelector((state: RootState) => state.search.value)
+    const dispatch = useDispatch()
 
+    const { loading, books, totalItems, page, isLastPage } = useBooksLoader()
 
-    const { getBooksList, loading, books, totalItems } = useBooksLoader()
-
-
-    useDebounce<string, DefaultCallback<string>>({
-        value: search,
-        callback: (text: string) => {
-
-            Boolean(text) && getBooksList({ search: text, page })
-        }
-    })
-
-
-    useDebounce<number, DefaultCallback<number>>({
-        value: page,
-        callback: (newPage: number) => {
-
-            Boolean(search) && getBooksList({ search, page: newPage })
-        }
-    })
 
 
     const navigationPanel = React.useMemo<JSX.Element | null>(() => {
 
-        return totalItems ? (<NavigationPanel
-            totalItems={totalItems}
-        />) : null
+        return totalItems ? (<NavigationPanel />) : null
 
     }, [totalItems])
 
+
+
+    React.useEffect(() => {
+
+        if (page == 1) {
+
+            dispatch(setTotalItems(totalItems))
+        }
+    }, [page, totalItems])
+
+
+
+    React.useEffect(() => {
+
+        dispatch(setLastPageFlag(isLastPage))
+
+    }, [isLastPage])
 
 
 
@@ -72,7 +69,9 @@ const Home: React.FC = () => {
 
         <SearchBlock />
 
+
         {navigationPanel}
+
 
         {loading && <Box
             component="li"
@@ -83,7 +82,15 @@ const Home: React.FC = () => {
         </Box>}
 
 
-        <BooksList books={books} />
+        {Boolean(books) && <BooksList books={books} />}
+
+        {!books && !loading && <Box
+            component="li"
+            sx={{ display: 'flex', p: 7, m: 0, justifyContent: 'center' }}
+        >
+
+            <Typography level="body1">{'No results found'}</Typography>
+        </Box>}
 
         {navigationPanel}
 
