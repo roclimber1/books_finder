@@ -17,10 +17,9 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 
+
 import { setPage } from 'src/store/pageSlice'
 
-
-import { MAX_RESULTS } from 'src/constants/main'
 
 
 
@@ -28,20 +27,16 @@ import type { RootState } from 'src/store/store'
 
 
 
-interface NavigationPanelProps {
-    totalItems: number
-}
 
 
 
+const NavigationPanel: React.FC = () => {
 
-const NavigationPanel: React.FC<NavigationPanelProps> = (props) => {
-
-
-    const { totalItems } = props
 
     const dispatch = useDispatch()
-    const currentPage: number = useSelector((state: RootState) => state.page.value)
+
+
+    const { totalItems, value: currentPage, isLastPage } = useSelector((state: RootState) => state.page)
 
 
 
@@ -71,6 +66,11 @@ const NavigationPanel: React.FC<NavigationPanelProps> = (props) => {
     }
 
 
+    const isNextPageDisabled = React.useMemo<boolean>(() => (currentPage >= totalItems) || isLastPage, [currentPage, isLastPage])
+
+    const isPreviousPageDisabled = React.useMemo<boolean>(() => (currentPage <= 1), [currentPage])
+
+
     return <React.Fragment>
 
         <Card
@@ -83,24 +83,30 @@ const NavigationPanel: React.FC<NavigationPanelProps> = (props) => {
                 variant="soft"
                 startDecorator={<KeyboardDoubleArrowLeftIcon />}
                 onClick={handleFirstPage}
+                disabled={isPreviousPageDisabled}
             >
                 First page
             </Button>
+
 
             <Button
                 variant="soft"
                 startDecorator={<KeyboardArrowLeftIcon />}
                 onClick={handleClickBackward}
+                disabled={isPreviousPageDisabled}
             >
                 Previous page
             </Button>
 
-            <Typography level="h2">{currentPage}</Typography>
+
+            <Typography level="h4">{currentPage}</Typography>
+
 
             <Button
                 variant="soft"
                 endDecorator={<KeyboardArrowRightIcon />}
                 onClick={handleClickForward}
+                disabled={isNextPageDisabled}
             >
                 Next page
             </Button>

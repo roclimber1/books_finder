@@ -4,7 +4,6 @@
 import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
 
 import { BOOK_DEFAULT_SRC, BOOK_DEFAULT_SRC_SET } from 'src/constants/main'
@@ -20,8 +19,6 @@ import CardContent from '@mui/joy/CardContent'
 
 import Typography from '@mui/joy/Typography'
 
-
-import { setPrevious } from 'src/store/searchSlice'
 
 
 
@@ -44,7 +41,6 @@ interface BookCardProps {
 const BookCard: React.FC<BookCardProps> = (props) => {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
 
     const { book } = props
@@ -58,13 +54,12 @@ const BookCard: React.FC<BookCardProps> = (props) => {
 
     const handleClick: React.MouseEventHandler<HTMLAnchorElement> = () => {
 
-        dispatch(setPrevious())
         navigate(`/book/${id}`)
     }
 
 
     return (
-        <Card variant="outlined" sx={{ width: 320 }}>
+        <Card variant="outlined" sx={{ width: 250 }}>
 
 
             <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
@@ -88,7 +83,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
                     Explore
                 </Button>
 
-                <AspectRatio minHeight="400px" maxHeight="500px" sx={{ my: 2 }}>
+                <AspectRatio ratio="3/4" sx={{ my: 2 }}>
                     <img
                         src={smallThumbnail ?? BOOK_DEFAULT_SRC}
                         srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}

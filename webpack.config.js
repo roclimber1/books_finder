@@ -17,7 +17,7 @@ module.exports = {
     mode: 'development',
     entry: joinPath(__dirname, '/src/index.tsx'),
     output: {
-        path: resolvePath(__dirname, 'public')
+        path: resolvePath(__dirname, 'dist')
     },
     module: {
         rules: [
