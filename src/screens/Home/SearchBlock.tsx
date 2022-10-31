@@ -40,6 +40,7 @@ const SearchBlock: React.FC = () => {
         const { value } = event.target
 
         dispatch(setSearch(value))
+        dispatch(setPage(1))
     }
 
 
@@ -55,6 +56,7 @@ const SearchBlock: React.FC = () => {
         const { value } = event.target
 
         dispatch(setSubject(value))
+        dispatch(setPage(1))
     }
 
 
