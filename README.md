@@ -27,3 +27,7 @@ npm run start
 ```bash
 npm run build
 ```
+
+### Результат можно посмотреть здесь (See result here)
+
+[Click here](https://roclimber1.github.io/pages/books_finder/index.html)
