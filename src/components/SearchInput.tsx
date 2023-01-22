@@ -6,7 +6,7 @@ import React from 'react'
 
 import Button from '@mui/joy/Button'
 
-import TextField from '@mui/joy/TextField'
+import Input from '@mui/joy/Input'
 import Tooltip from '@mui/joy/Tooltip'
 
 import FormControl from '@mui/joy/FormControl'
@@ -44,7 +44,7 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
 
             {Boolean(label) && <FormLabel>{label}</FormLabel>}
 
-            <TextField
+            <Input
                 color="neutral"
                 value={value}
                 disabled={false}

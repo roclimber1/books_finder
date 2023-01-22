@@ -6,7 +6,7 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
-import { BOOK_DEFAULT_SRC, BOOK_DEFAULT_SRC_SET } from 'src/constants/main'
+import coverImage from '../images/cover.jpg'
 
 
 import Button from '@mui/joy/Button'
@@ -82,9 +82,7 @@ const Book = () => {
 
                     <AspectRatio ratio="3/4" sx={{ width: 250 }}>
                         <img
-                            src={smallThumbnail ?? BOOK_DEFAULT_SRC}
-                            srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}
-                            loading="lazy"
+                            src={smallThumbnail ?? coverImage}
                             alt={title}
                         />
 
