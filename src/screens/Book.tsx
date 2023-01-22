@@ -6,7 +6,7 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 
-import * as coverImage from '../images/cover.jpg'
+import coverImage from '../images/cover.jpg'
 
 
 import Button from '@mui/joy/Button'
@@ -83,7 +83,6 @@ const Book = () => {
                     <AspectRatio ratio="3/4" sx={{ width: 250 }}>
                         <img
                             src={smallThumbnail ?? coverImage}
-                            loading="lazy"
                             alt={title}
                         />
 

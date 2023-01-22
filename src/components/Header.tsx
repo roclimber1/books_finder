@@ -14,7 +14,7 @@ import Typography from '@mui/joy/Typography'
 
 
 
-import * as footerImage from '../images/footer.jpg'
+import footerImage from '../images/footer.jpg'
 
 
 
@@ -36,7 +36,6 @@ const Header = (): JSX.Element => {
             <CardCover>
                 <img
                     src={footerImage}
-                    loading="lazy"
                     alt=""
                 />
             </CardCover>

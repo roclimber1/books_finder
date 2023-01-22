@@ -6,7 +6,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-import * as coverImage from '../../images/cover.jpg'
+import coverImage from '../../images/cover.jpg'
 
 
 import AspectRatio from '@mui/joy/AspectRatio'
@@ -86,7 +86,6 @@ const BookCard: React.FC<BookCardProps> = (props) => {
                 <AspectRatio ratio="3/4" sx={{ my: 2 }}>
                     <img
                         src={smallThumbnail ?? coverImage}
-                        loading="lazy"
                         alt={title}
                     />
                 </AspectRatio>
