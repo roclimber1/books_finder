@@ -6,7 +6,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-import { BOOK_DEFAULT_SRC, BOOK_DEFAULT_SRC_SET } from 'src/constants/main'
+import * as coverImage from '../../images/cover.jpg'
 
 
 import AspectRatio from '@mui/joy/AspectRatio'
@@ -85,8 +85,7 @@ const BookCard: React.FC<BookCardProps> = (props) => {
 
                 <AspectRatio ratio="3/4" sx={{ my: 2 }}>
                     <img
-                        src={smallThumbnail ?? BOOK_DEFAULT_SRC}
-                        srcSet={thumbnail ?? BOOK_DEFAULT_SRC_SET}
+                        src={smallThumbnail ?? coverImage}
                         loading="lazy"
                         alt={title}
                     />
