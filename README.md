@@ -28,6 +28,6 @@ npm run start
 npm run build
 ```
 
-### Результат можно посмотреть здесь (See result here)
+### Результат можно посмотреть здесь (See the result here)
 
 [Click here](https://roclimber1.github.io/pages/books_finder/index.html)
